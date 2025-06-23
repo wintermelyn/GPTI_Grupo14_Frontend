@@ -1,72 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OrganizAI - Frontend
 
-## Getting Started
+OrganizAI es una aplicación web para la gestión inteligente de tareas y horarios académicos. Permite a estudiantes organizar sus tareas, definir su disponibilidad horaria y generar un cronograma personalizado de estudio, integrándose con un backend que realiza la planificación automática.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Tecnologías principales
+- **Next.js** (App Router)
+- **React**
+- **TypeScript**
+- **TailwindCSS**
+- **Axios** (para requests HTTP)
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+organizai/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx         # Layout global
+│   │   └── page.tsx           # Página principal
+│   ├── components/
+│   │   ├── organizai.tsx      # Componente principal
+│   │   ├── task-input.tsx     # Formulario de tareas
+│   │   ├── availability-scheduler.tsx # Disponibilidad horaria
+│   │   ├── schedule-generator.tsx     # Botón y lógica de generación
+│   │   └── schedule-viewer.tsx       # Visualización del cronograma
+│   └── lib/
+│       ├── api.ts             # Configuración de Axios
+│       ├── types.tsx          # Tipos TypeScript
+│       └── utils.ts           # Utilidades
+├── public/                    # Recursos estáticos
+└── README.md                  # Este archivo
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Instalación y ejecución
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Instala dependencias:**
+   ```bash
+   npm install
+   # o
+   yarn install
+   ```
 
-## Learn More
+2. **Configura el backend:**
+   - El frontend espera un backend corriendo en `http://localhost:8000/api`.
+   - Puedes modificar la URL base en `src/lib/api.ts` si tu backend está en otra dirección.
 
-To learn more about Next.js, take a look at the following resources:
+3. **Inicia el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   # o
+   yarn dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Abre la app:**
+   - Ve a [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🧩 ¿Cómo funciona?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Gestión de tareas:**
+   - Agrega tareas con nombre, duración (minutos), fecha límite y prioridad.
+2. **Disponibilidad horaria:**
+   - Define tus bloques de tiempo disponibles por día.
+3. **Generación de cronograma:**
+   - Haz clic en "Generar Cronograma". El frontend envía tus tareas y disponibilidad al backend.
+   - El backend responde con un cronograma óptimo, que se muestra en la interfaz.
+4. **Visualización:**
+   - Puedes ver el cronograma en formato semanal o de lista, y exportarlo a PDF.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
 
-## Getting Started
+## 🔗 Integración con Backend
 
-First, run the development server:
+- El frontend utiliza Axios (`src/lib/api.ts`) para comunicarse con el backend.
+- El endpoint esperado para generar el cronograma es:
+  - `POST http://localhost:8000/api/generate-schedule`
+- El formato de request y response debe ser compatible con el backend que implementes.
+- Si tienes problemas de CORS, asegúrate de configurar correctamente tu backend para aceptar peticiones desde `http://localhost:3000`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Personalización
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Cambiar la URL del backend:**
+  - Edita `src/lib/api.ts` y modifica el valor de `baseURL`.
+- **Modificar tipos de datos:**
+  - Edita `src/lib/types.tsx` para ajustar los tipos de tareas, disponibilidad, etc.
+- **Estilos:**
+  - Usa TailwindCSS para personalizar la apariencia.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Scripts útiles
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` — Inicia el servidor de desarrollo
+- `npm run build` — Compila la app para producción
+- `npm run start` — Sirve la app compilada
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contribuciones
 
-## Deploy on Vercel
+¡Las contribuciones son bienvenidas! Abre un issue o un pull request si quieres mejorar OrganizAI.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 Licencia
+
+MIT
