@@ -51,7 +51,7 @@ export default function ScheduleGenerator({ tasks, availability, strategy, onGen
         <div className="text-sm text-muted-foreground">
           <p>
             Se generará un cronograma basado en {tasks.length} tarea(s) y {availability.length} bloque(s) de
-            disponibilidad, utilizando la estrategia "{strategy}".
+            disponibilidad, utilizando la estrategia {strategy}.
           </p>
         </div>
       )}
