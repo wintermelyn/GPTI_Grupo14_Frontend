@@ -7,11 +7,12 @@ import { AlertCircle, Calendar, Loader2 } from "lucide-react"
 interface ScheduleGeneratorProps {
   tasks: Task[]
   availability: Availability[]
+  strategy: string
   onGenerate: () => void
   isGenerating: boolean
 }
 
-export default function ScheduleGenerator({ tasks, availability, onGenerate, isGenerating }: ScheduleGeneratorProps) {
+export default function ScheduleGenerator({ tasks, availability, strategy, onGenerate, isGenerating }: ScheduleGeneratorProps) {
   const canGenerate = tasks.length > 0 && availability.length > 0
 
   return (
@@ -50,7 +51,7 @@ export default function ScheduleGenerator({ tasks, availability, onGenerate, isG
         <div className="text-sm text-muted-foreground">
           <p>
             Se generará un cronograma basado en {tasks.length} tarea(s) y {availability.length} bloque(s) de
-            disponibilidad.
+            disponibilidad, utilizando la estrategia "{strategy}".
           </p>
         </div>
       )}

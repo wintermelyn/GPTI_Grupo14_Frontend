@@ -26,6 +26,7 @@ export default function TaskInput({ onAddTask, onRemoveTask, tasks }: TaskInputP
   const [duration, setDuration] = useState(60)
   const [dueDate, setDueDate] = useState<Date | undefined>(undefined)
   const [priority, setPriority] = useState("media")
+  const [actualGrade, setActualGrade] = useState(4)
   const [error, setError] = useState("")
 
   const handleAddTask = () => {
@@ -48,6 +49,7 @@ export default function TaskInput({ onAddTask, onRemoveTask, tasks }: TaskInputP
       duration,
       dueDate,
       priority,
+      actualGrade,
       createdAt: new Date(),
     }
 
@@ -56,6 +58,7 @@ export default function TaskInput({ onAddTask, onRemoveTask, tasks }: TaskInputP
     setDuration(60)
     setDueDate(undefined)
     setPriority("media")
+    setActualGrade(4)
     setError("")
   }
 
@@ -136,6 +139,22 @@ export default function TaskInput({ onAddTask, onRemoveTask, tasks }: TaskInputP
               </SelectContent>
             </Select>
           </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="task-actual-grade">Promedio actual del curso (1.0-7.0)</Label>
+            <div className="flex items-center">
+              <Input
+                id="task-actual-grade"
+                type="number"
+                min="1"
+                max="7"
+                step="0.1"
+                value={actualGrade}
+                onChange={(e) => setActualGrade(Number.parseFloat(e.target.value))}
+              />
+            </div>
+          </div>
+
         </div>
 
         {error && <p className="text-sm text-red-500">{error}</p>}

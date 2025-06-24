@@ -4,6 +4,7 @@ export interface Task {
   duration: number // en minutos
   dueDate: Date
   priority: string // "alta", "media", "baja"
+  actualGrade: number // calificación actual del 1 al 7
   createdAt: Date
 }
 
