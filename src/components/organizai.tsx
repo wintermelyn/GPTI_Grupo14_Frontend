@@ -1,6 +1,5 @@
 "use client"
 
-import React from "react"
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,6 +7,7 @@ import TaskInput from "@/components/task-input"
 import AvailabilityScheduler from "@/components/availability-scheduler"
 import ScheduleGenerator from "@/components/schedule-generator"
 import ScheduleViewer from "@/components/schedule-viewer"
+import StrategySelector from "@/components/strategy-selector"
 import type { Task, Availability, ScheduleBlock } from "@/lib/types"
 import api from "@/lib/api"
 
@@ -44,7 +44,6 @@ export default function OrganizAI() {
     }
   }
 
-
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="text-center mb-8">
@@ -53,14 +52,14 @@ export default function OrganizAI() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full space-y-4">
-        <TabsList className="grid w-full grid-cols-4 bg-white rounded-md shadow-sm border">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="tasks">Tareas</TabsTrigger>
           <TabsTrigger value="availability">Disponibilidad</TabsTrigger>
           <TabsTrigger value="strategy">Estrategia</TabsTrigger>
           <TabsTrigger value="schedule">Cronograma</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="tasks" className="mt-4">
+        <TabsContent value="tasks">
           <Card>
             <CardHeader>
               <CardTitle>Gestión de Tareas</CardTitle>
@@ -72,7 +71,7 @@ export default function OrganizAI() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="availability" className="mt-4">
+        <TabsContent value="availability">
           <Card>
             <CardHeader>
               <CardTitle>Disponibilidad Horaria</CardTitle>
@@ -84,44 +83,18 @@ export default function OrganizAI() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="strategy" className="mt-4">
+        <TabsContent value="strategy">
           <Card>
             <CardHeader>
               <CardTitle>Estrategia de Estudio</CardTitle>
               <CardDescription>Selecciona una estrategia para organizar tu estudio</CardDescription>
             </CardHeader>
             <CardContent>
-              <form className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {[
-                    { label: "Estructura simple", value: "Estructura simple" },
-                    { label: "Técnica Pomodoro", value: "pomodoro" },
-                    { label: "Técnica Feynman", value: "feynman" },
-                    { label: "Mapas mentales", value: "mapas" },
-                  ].map(({ label, value }) => (
-                    <label
-                      key={value}
-                      className={`
-                        border rounded-lg p-4 cursor-pointer transition-colors
-                        ${strategy === value ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:bg-gray-50"}
-                      `}
-                    >
-                      <input
-                        type="radio"
-                        name="estrategia"
-                        value={value}
-                        checked={strategy === value}
-                        onChange={(e) => setStrategy(e.target.value)}
-                        className="sr-only"
-                      />
-                      <span className="font-medium text-gray-800">{label}</span>
-                    </label>
-                  ))}
-                </div>
-              </form>
+              <StrategySelector strategy={strategy} onStrategyChange={setStrategy} />
             </CardContent>
           </Card>
         </TabsContent>
+
         <TabsContent value="schedule" className="mt-4">
           <Card>
             <CardHeader>
@@ -141,7 +114,6 @@ export default function OrganizAI() {
           </Card>
         </TabsContent>
       </Tabs>
-
     </div>
   )
 }
